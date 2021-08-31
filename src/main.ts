@@ -17,6 +17,8 @@ const aboutMe = {
   ],
 }
 
+console.log(`My favorite movies are ${aboutMe.favoriteMovies}`)
+
 const userName = window.prompt('Enter your name')
 console.log(`Hello ${userName}! Welcome to the program!`)
 
