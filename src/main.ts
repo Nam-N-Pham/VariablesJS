@@ -53,6 +53,8 @@ function _map<TSource, TResult>(
 }
 
 const numbers = [1, 2, 3, 4, 5]
+const strings = ['one', 'two', 'three', 'four', 'five']
+
 const doubled = _map(numbers, function (number) {
   return number * 2
 })
@@ -61,15 +63,14 @@ const increased = _map(numbers, function (number) {
   return number + 2
 })
 
-console.log(doubled)
-console.log(increased)
+console.log('Using map to double: ' + doubled)
+console.log('Using map to increase: ' + increased)
 
-const strings = ['one', 'two', 'three', 'four', 'five']
 const uppered = _map(strings, function (string) {
   return string.toUpperCase()
 })
 
-console.log(uppered)
+console.log('Using map to make strings uppercase: ' + uppered)
 
 // function _filter(
 //   numbers: number[],
@@ -102,13 +103,12 @@ const numbersFiltered = _filter(numbers, function (number) {
   return number > 3
 })
 
-console.log(numbersFiltered)
-
 const stringsFiltered = _filter(strings, function (string) {
   return string === 'three'
 })
 
-console.log(stringsFiltered)
+console.log('Using filter to get numbers > 3: ' + numbersFiltered)
+console.log('Using filter to three: ' + stringsFiltered)
 
 // function _reduce(
 //   numbers: number[],
@@ -146,5 +146,72 @@ const stringsTotalLetters = _reduce(
   0
 )
 
-console.log(numbersReduced)
-console.log(stringsTotalLetters)
+console.log('Using reduce to get the sum of an array: ' + numbersReduced)
+console.log(
+  'Using reduce to get the the total number of letters in an array: ' +
+    stringsTotalLetters
+)
+
+// function _every(numbers: number[], func: (number: number) => boolean): boolean {
+//   let flag = true
+//   numbers.forEach((number) => {
+//     if (func(number) === false) {
+//       flag = false
+//     }
+//   })
+//   return flag
+// }
+
+function _every<TSource>(
+  numbers: TSource[],
+  func: (number: TSource) => boolean
+): boolean {
+  let flag = true
+  numbers.forEach((number) => {
+    if (func(number) === false) {
+      flag = false
+    }
+  })
+  return flag
+}
+
+const numbersEvery = _every(numbers, function (number) {
+  return number < 2
+})
+
+const stringsEvery = _every(strings, function (string) {
+  return string === 'three'
+})
+
+console.log('Using every to check if all numbers are < 2: ' + numbersEvery)
+console.log('Using every to check if all strings are three: ' + stringsEvery)
+
+// function _some(numbers: number[], func: (number: number) => boolean): boolean {
+//   let flag = false
+//   numbers.forEach((number) => {
+//     if (func(number)) flag = true
+//   })
+//   return flag
+// }
+
+function _some<TSource>(
+  numbers: TSource[],
+  func: (number: TSource) => boolean
+): boolean {
+  let flag = false
+  numbers.forEach((number) => {
+    if (func(number)) flag = true
+  })
+  return flag
+}
+
+const numbersSome = _some(numbers, function (number) {
+  return number < 2
+})
+
+const stringsSome = _some(strings, function (string) {
+  return string === 'three'
+})
+
+console.log('Using some to check if there is a number < 2: ' + numbersSome)
+console.log('Using some to check if there is a string three: ' + stringsSome)
